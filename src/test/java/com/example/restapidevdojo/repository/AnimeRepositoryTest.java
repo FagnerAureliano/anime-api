@@ -1,6 +1,7 @@
 package com.example.restapidevdojo.repository;
 
 import com.example.restapidevdojo.domain.Anime;
+import com.example.restapidevdojo.util.AnimeCreator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Save Persists Anime When Successful")
     void save_PersistsAnime_WhenSuccessful(){
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = AnimeCreator.createAnimeToBeSaved();
         Anime animeSaved = animeRepository.save(animeToBeSaved);
 
         Assertions.assertThat(animeSaved).isNotNull();
@@ -32,7 +33,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Save Persists Anime When Successful")
     void save_UpdateAnime_WhenSuccessful(){
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = AnimeCreator.createAnimeToBeSaved();
         Anime animeSaved = animeRepository.save(animeToBeSaved);
 
         animeSaved.setName("Jojo");
@@ -47,7 +48,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Delete Removes Anime When Successful")
     void delete_RemovesAnime_WhenSuccessful(){
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = AnimeCreator.createAnimeToBeSaved();
         Anime animeSaved = animeRepository.save(animeToBeSaved);
 
         animeRepository.delete(animeSaved);
@@ -60,7 +61,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Find By Name Returns List of Anime When Anime Exists")
     void findByName_ReturnsAnimeList_WhenExists(){
-        Anime animeToBeSaved = createAnime();
+        Anime animeToBeSaved = AnimeCreator.createAnimeToBeSaved();
         Anime animeSaved = animeRepository.save(animeToBeSaved);
 
         List<Anime> animeList = animeRepository.findByName(animeSaved.getName());
@@ -91,9 +92,4 @@ class AnimeRepositoryTest {
 
     }
 
-    private Anime createAnime(){
-        return Anime.builder()
-                .name("Berserk")
-                .build();
-    }
 }

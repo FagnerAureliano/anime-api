@@ -23,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AnimeController {
 
-    private final DateUtil dateUtil;
+//    private final DateUtil dateUtil;
     private AnimeService animeService;
 
     @GetMapping
@@ -42,7 +42,7 @@ public class AnimeController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable long id) {
-        log.info(dateUtil.formatLocalDateToDatabaeStyle(LocalDateTime.now()));
+//        log.info(dateUtil.formatLocalDateToDatabaeStyle(LocalDateTime.now()));
         return ResponseEntity.ok(animeService.findById(id));
     }
 
