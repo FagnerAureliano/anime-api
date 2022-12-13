@@ -36,8 +36,8 @@ public class AnimeController {
         return ResponseEntity.ok(animeService.listAllNonPageable());
     }
     @GetMapping("/find")
-    public ResponseEntity<List<Anime>> listByName( @RequestParam(required = false) String name){
-        return ResponseEntity.ok( animeService.listByName(name));
+    public ResponseEntity<List<Anime>> findByName( @RequestParam(required = false) String name){
+        return ResponseEntity.ok( animeService.findByName(name));
     }
 
     @GetMapping(path = "/{id}")
@@ -56,8 +56,8 @@ public class AnimeController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PutMapping
-    public ResponseEntity<Anime> replace(@RequestBody AnimePutRequestBody anime){
-        animeService.replace(anime);
+    public ResponseEntity<Void> replace(@RequestBody AnimePutRequestBody animePutRequestBody){
+        animeService.replace(animePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
