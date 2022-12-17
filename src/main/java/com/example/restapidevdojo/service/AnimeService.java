@@ -50,7 +50,7 @@ public class AnimeService {
     }
 
     @Transactional
-    public Anime replace(AnimePutRequestBody animePutRequestBody) {
+    public void replace(AnimePutRequestBody animePutRequestBody) {
 
         Anime savedAnime = findById(animePutRequestBody.getId());
 //        Anime anime = AnimeMapper.INSTANCE.toAnime(animePutRequestBody);
@@ -59,7 +59,8 @@ public class AnimeService {
                 .id(savedAnime.getId())
                 .name(animePutRequestBody.getName())
                 .build();
-        return animeRepository.save(anime);
+         animeRepository.save(anime);
+//        return animeRepository.save(anime);
     }
 
 }
