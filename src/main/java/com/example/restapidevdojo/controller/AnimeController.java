@@ -5,6 +5,9 @@ import com.example.restapidevdojo.DTO.AnimePutRequestBody;
 import com.example.restapidevdojo.domain.Anime;
 import com.example.restapidevdojo.service.AnimeService;
 import com.example.restapidevdojo.util.DateUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springdoc.api.annotations.ParameterObject;
@@ -37,6 +40,10 @@ public class AnimeController {
     }
 
     @GetMapping("/all")
+    @Operation(
+            summary = "List all animes paginated",
+            description = "The default size is 20, use the parameter size to change the default value",
+            tags = {"anime"})
     public ResponseEntity<List<Anime>> listAll() {
         return ResponseEntity.ok(animeService.listAllNonPageable());
     }
@@ -66,6 +73,10 @@ public class AnimeController {
     }
 
     @DeleteMapping("/admin/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Successful Operation"),
+            @ApiResponse(responseCode = "400", description = "When Anime does not exists in the database")
+    })
     public ResponseEntity<Void> delete(@PathVariable long id) {
         animeService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
