@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/animes/admin/**").hasRole("ADMIN")
                 .antMatchers("/animes/**").hasRole("USER")
+                .antMatchers("/actuator/**").permitAll()
                 .anyRequest()
                 .authenticated()
                  .and()
@@ -48,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         log.info("password encoded : {}", passwordEncoder.encode("test"));
 
         auth.inMemoryAuthentication()
-                .withUser("fagner2")
+                .withUser("fagner")
                 .password(passwordEncoder.encode("test"))
                 .roles("USER", "ADMIN")
                 .and()
